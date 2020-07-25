@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Particle Web</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .wrap {
+      background-color: white;
+      opacity: 0.5;
+      width: 450px;
+      height: 299px;
+      padding-top: 20px;
+
+      border-bottom: solid rgb(221, 217, 217) 0px;
+
+    }
+
+    .wrap .tag {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    .wrap .tag .input {
+      width: 388px;
+      height: 18px;
+      padding: 10px;
+      border: solid rgb(221, 221, 221) 1px;
+    }
+
+    .wrap .tag .mag {
+      width: 410px;
+      height: 20px;
+      margin: 6px 0px;
+    }
+
+    .wrap .mab {
+      margin-top: 23px;
+      margin-bottom: 12px;
+    }
+
+    .wrap .mab .in {
+      margin: 0px;
+    }
+
+    .wrap .mab .data {
+      font-size: 12px;
+      color: rgb(113, 113, 113);
+    }
+
+    .wrap .mab .pata {
+      margin-left: 10px;
+      font-size: 12px;
+      color: rgb(187, 187, 187);
+      margin-right: 54px;
+    }
+
+    .wrap .mab .hf {
+      font-size: 12px;
+      color: rgb(0, 161, 214);
+      text-decoration: none;
+    }
+
+    .wrap .mab #pd {
+      margin: 0px;
+      margin-left: 20px;
+    }
+
+    .wrap .tabe #btn {
+      width: 184px;
+      height: 36px;
+      background-color: rgb(3, 129, 170);
+      border: solid rgb(3, 129, 170) 1px;
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      margin-right: 34px;
+    }
+
+    .wrap .tabe #btn_s {
+      width: 184px;
+      height: 36px;
+      background-color: white;
+      border: solid rgb(204, 204, 204) 1px;
+      color: rgb(85, 85, 85);
+      font-size: 14px;
+    }
+
+    .wrap .tabe {
+      text-align: center;
+    }
+
+    .tap {
+      background-color: blue;
+      opacity: 0.9;
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      border: none;
+    }
+
+    .tap .hp {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas height="100%" width="100%" id="canvas" style="position: fixed; height: 100%;z-index: -1000;"></canvas>
+  <form action="/admin/log" method="POST">
+    <div class="wrap">
+
+      <div class="tag">
+        <input class="input" type="text" name="user" placeholder="用户名">
+        <div class="mag"></div>
+        <input class="input" type="password" name="password" placeholder="密码">
+      </div>
+      <div class="mab">
+        <p id="pd"><input class="in" type="checkbox" name="jizhu">
+          <span class="data">记住我</span>
+          <span class="pata">不是自己的电脑上不要勾选此项</span>
+          <a class="hf" href="">无法验证?</a>
+          <a class="hf" href="">忘记密码?</a>
+        </p>
+      </div>
+      <div class="tabe">
+        <span>
+          <button type="submit" name="btn" id="btn" value="login">登录</button>
+          <!-- <button type="submit" name="btn" id="btn_s" value="register">注册</button> -->
+
+        </span>
+      </div>
+    </div>
+  </form>
+  <script src="./js/index.js" charset="utf-8"></script>
+
+</body>
+
+</html>

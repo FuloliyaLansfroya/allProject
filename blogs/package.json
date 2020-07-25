@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "body-parser": "",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "mongodb": ""
+  }
+}

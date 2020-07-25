@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-2.1.0.js"></script>
+    <script src="./js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./js/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./css/writPage.css">
+    <style>
+        .wrap {
+            width: 100%;
+            min-height: 400px;
+            position: absolute;
+            display: none;
+
+        }
+
+        .wrap-box {
+            position: relative;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas height="100%" width="100%" id="canvas" style="position: fixed; height: 100%;z-index: -1000;"></canvas>
+    <nav class="navbar navbar-default" >
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">主页</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="/admin">个人中心</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false"> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/logout">注销</a></li>
+                            <li><a href="/admin/change">修改密码</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container colorful">
+        <div class="page-header" >
+            <h1>个人空间 <small>登录使用</small></h1>
+        </div>
+        <div class="col-lg-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class=" list" data-value="home"><a href="#">首页</a></li>
+                <li role="presentation" class="list" data-value="fabiao"><a href="#">发表文章</a></li>
+                <li role="presentation" class="list" data-value="check" id="shenhe"><a href="#">审核评论</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-9 wrap-box">
+            <div class="wrap active" id="home">个人首页</div>
+            <div class="wrap" id="fabiao">
+                <form class="form-horizontal" method="POST" action="/admin/submitPage">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">标题</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="标题" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">简介</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="简介" name="intor">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="作者" name="author">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">内容</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="15" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="wrap" id="check">
+                <ul class="list-group">
+
+                </ul>
+            </div>
+        </div>
+        <script src="./js/index.js"></script>
+        <script>
+            var list = $(".list")
+            var divs = $(".wrap")
+            list.on("click", function () {
+                var value = $(this).attr("data-value")
+                var div = $("#" + value)
+                list.removeClass("active")
+                $(this).addClass("acitve")
+                divs.removeClass("active")
+                div.addClass("active")
+            })
+            var rander = function (data) {
+                var html = ""
+                data.forEach(element => {
+                    html += `
+                    <li class="list-group-item">${element.content}<span class="badge">${element.fromTitle}</span></li>
+                    <div class="btn-group" role="group" aria-label="...">
+                    <button type="submit" class="btn btn-default btn-pass btn-success" data-id=${element._id}>通过</button>
+                    <button type="submit" class="btn btn-default btn-nopass btn-danger" data-id=${element._id}>拒绝</button>
+                    </div>
+                    `
+                });
+                $(".list-group").html(html)
+                addlistener()
+            }
+            var getComment = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/admin/getComment",
+                    data: {},
+                    success: function (e) {
+                        rander(e)
+
+                    }
+
+                })
+
+            }
+            var addlistener = function () {
+                $(".btn-pass").on("click", function () {
+                    pass($(this).attr("data-id"))
+                })
+                $(".btn-nopass").on("click", function () {
+                    nopass($(this).attr("data-id"))
+                })
+            }
+            var pass = function (id) {
+                $.ajax({
+                    type: "get",
+                    url: "/admin/passComment",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        console.log("评论通过")
+                        getComment()
+                    }
+                })
+            }
+            var nopass = function (id) {
+                $.ajax({
+                    type: "get",
+                    url: "/admin/nopassComment",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        console.log("评论不通过")
+                        getComment()
+                    }
+                })
+            }
+            $("#shenhe").on("click", function () {
+                getComment()
+            })
+        </script>
+    </div>
+
+</body>
+
+</html>
