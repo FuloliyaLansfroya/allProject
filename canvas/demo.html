@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            background-color: black;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="can"></canvas>
+    <script>
+        var canvas = document.getElementById("can")
+        var ctx = canvas.getContext('2d');
+        var c_w = canvas.width = window.innerWidth
+        var c_h = canvas.height = window.innerHeight
+        var speedX = 2
+        var speedY = 3
+        var x = 1;
+        var y = 2;
+        var init = function () {
+            this.x = Math.random() * c_w;
+            this.y = Math.random() * c_h;
+            this.speedX = (Math.random() * 1 + 1) >= 1.5 ? -1 : 1;
+            this.speedY = (Math.random() * 1 + 1) >= 1.5 ? -1 : 1;
+            this.r = 2;
+        }
+        var arr = []
+        for (var i = 0; i < 100; i++) {
+            arr.push(new init);
+        }
+        var drawline = function () {
+            for (var i = 0; i < arr.length; i++) {
+                var now1 = arr[i]
+                for (var j = 0; j < arr.length; j++) {
+                    var now2 = arr[j]
+                    if (Math.sqrt(Math.pow(now1.x - now2.x, 2) + Math.pow(now1.y - now2.y, 2)) <= 100) {
+                        ctx.beginPath()
+                        ctx.moveTo(now1.x, now1.y)
+                        ctx.lineTo(now2.x, now2.y)
+                        ctx.strokeStyle = 'white'
+                        ctx.stroke()
+                        ctx.closePath()
+                    }
+                }
+            }
+        }
+
+        setInterval(function () {
+            ctx.fillStyle = 'rgba(0,0,0,0.05)';//刷新画布
+            ctx.fillRect(0, 0, c_w, c_h);
+            for (var i = 0; i < arr.length; i++) {
+                var value = arr[i]
+                if (value.x >= c_w || value.x <= 0) {
+                    value.speedX = -value.speedX;
+                }
+                if (value.y >= c_h || value.y <= 0) {
+                    value.speedY = -value.speedY;
+                }
+                ctx.beginPath();
+                ctx.arc(value.x, value.y, value.r, 0, Math.PI * 2)
+                ctx.fillStyle = 'white';
+                ctx.fill()
+                value.x += value.speedX;
+                value.y += value.speedY;
+                ctx.closePath();
+
+            }
+            drawline()
+        }, 1000 / 60)
+
+    </script>
+</body>
+
+</html>

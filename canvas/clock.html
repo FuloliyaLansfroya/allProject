@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+        body {
+            background-color: black;
+        }
+
+        .wrap {
+            width: 500px;
+            height: 500px;
+            border-radius: 100%;
+            background-color: white;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .nub {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .number {
+            width: 50px;
+            height: 50px;
+            display: block;
+            font-size: 20px;
+            text-align: center;
+            line-height: 50px;
+            position: absolute;
+            left: 225px;
+            top: 225px;
+        }
+
+        .point {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        #second {
+            width: 4px;
+            height: 200px;
+            background-color: black;
+            position: absolute;
+            left: 248px;
+            top: 52px;
+            transform-origin: 2px 198px;
+            border-radius: 100px;
+        }
+
+        #min {
+            width: 8px;
+            height: 160px;
+            background-color: black;
+            position: absolute;
+            left: 246px;
+            top: 94px;
+            transform-origin: 4px 156px;
+            border-radius: 100px;
+        }
+
+        #hour {
+            width: 12px;
+            height: 120px;
+            background-color: black;
+            position: absolute;
+            left: 244px;
+            top: 136px;
+            transform-origin: 6px 114px;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="nub">
+            <span class="number">12</span>
+            <span class="number">1</span>
+            <span class="number">2</span>
+            <span class="number">3</span>
+            <span class="number">4</span>
+            <span class="number">5</span>
+            <span class="number">6</span>
+            <span class="number">7</span>
+            <span class="number">8</span>
+            <span class="number">9</span>
+            <span class="number">10</span>
+            <span class="number">11</span>
+        </div>
+        <div class="point">
+            <div id="second"></div>
+            <div id="min"></div>
+            <div id="hour"></div>
+        </div>
+    </div>
+    <script>
+        var numbers = document.getElementsByClassName("number")
+        var wrap = document.getElementsByClassName('wrap')[0]
+        var r = 240;
+        for (var i = 0; i < numbers.length; i++) {
+            var y = 0, x = 0;
+            y = - r * Math.cos(i * Math.PI / 6)
+            x = r * Math.sin(i * Math.PI / 6)
+            numbers[i].style.transform = 'translateY(' + y + 'px)' + ' translateX(' + x + 'px)'
+        }
+        var getPostion = function (width, height) {
+            var left = 250 - width / 2;
+            var top = 250 - (height - width / 2)
+            var x = width / 2;
+            var y = height - width / 2
+            console.log(left, top, x, y)
+        }//计算用函数
+        var sPo = document.getElementById("second");
+        var mPo = document.getElementById("min");
+        var hPo = document.getElementById("hour");
+        var setPoint = function () {
+            var now = new Date()
+            var h = now.getHours()
+            var m = now.getMinutes()
+            var s = now.getSeconds()
+            var sDeg = s / 60 * 360;
+            var mDeg = m / 60 * 360 + s / 60 * 360 / 60;
+            var hDeg = (h - 12) / 12 * 360 + m / 60 * 360 / 12;
+
+            sPo.style.transform = 'rotate(' + sDeg + 'deg)'
+            mPo.style.transform = 'rotate(' +mDeg+ 'deg)'
+            hPo.style.transform = 'rotate(' +hDeg + 'deg)'
+        }
+
+        setInterval(setPoint, 1000/60)
+    </script>
+</body>
+
+</html>
