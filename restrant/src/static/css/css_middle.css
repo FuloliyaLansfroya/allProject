@@ -1,0 +1,43 @@
+.main .middle {
+            width: 15%;
+            height: 100%;
+            background-color: #f5f5f5;
+        }
+
+        .main .right {
+            width: 80%;
+            height: 100%;
+            background-color: red;
+        }
+        .main .middle .title{
+            height: 15%;
+            width: 100%;
+        }
+        .main .middle .title .second{
+            padding-top: 30px;
+            padding-bottom: 10px;
+        }
+
+        .main .middle .title .second .tp{
+            padding: 0;
+            margin: 0;
+        }
+        .main .middle .title .second .sp{
+            margin-left: 5px;
+        }
+        .main .middle .title .second .sp.mine{
+            margin-left: 80px;
+        }
+        .main .middle .content{
+            overflow: scroll;
+            width: 100%;
+            height: 85%;
+        }
+        .main .middle .content .list{
+            list-style: none;
+        }
+        .main .middle .content .list.mine{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
