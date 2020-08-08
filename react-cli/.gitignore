@@ -1,0 +1,35 @@
+node_modules
+dist
+logs
+coverage
+run
+typings
+.nyc_output
+theme
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.un~
+.stylelintcache
+
+package-lock.json
+yarn.lock
+
+# exclude empty folder
+!.gitkeep
