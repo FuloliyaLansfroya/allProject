@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #alert_box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 400px;
+            height: 200px;
+            display: none;
+        }
+
+        #alert_box dl {
+            position: absolute;
+            left: -200px;
+            top: -100px;
+            width: 400px;
+            height: 200px;
+            border: solid 1px #999;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #alert_box dt {
+            background-color: #ccc;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        #alert_box dd {
+            padding: 6px;
+            margin: 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var a = "window.a";  //全局变量
+        function f() {  //全局函数
+            console.log(a);
+        }
+        console.log(window.a);  //返回字符串“window.a”
+        window.f();  //返回字符串“window.a”
+
+        // var user = prompt("请输入您的用户名");
+        // if (!!user) {  //把输入的信息转换为布尔值
+        //     var ok = confirm("您输入的用户名为：\n" + user + "\n 请确认。");  //输入信息确认
+        //     if (ok) {
+        //         alert("欢迎您：\n" + user);
+        //     } else {  //重新输入信息
+        //         user = prompt("请重新输入您的用户名：");
+        //         alert("欢迎您：\n" + user);
+        //     }
+        // } else {  //提示输入信息
+        //     user = prompt("请输入您的用户名：");
+        // }
+
+        window.alert = function (title, info) {
+            var box = document.getElementById("alert_box");
+            var html = '<dl><dt>' + title + '</dt><dd>' + info + '</dd><\/dl>';
+            if (box) {
+                box.innerHTML = html;
+                box.style.display = "block";
+            } else {
+                var div = document.createElement("div");
+                div.id = "alert_box";
+                div.style.display = "block";
+                document.body.appendChild(div);
+                div.innerHTML = html;
+            }
+        }
+        alert("重写alert()方法", "这仅是一个设计思路，还可以进一步设计");
+    </script>
+</body>
+
+</html>

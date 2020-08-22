@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <img name="img" src="bg.gif" />
+    <form name="form" method="post" action="c.biancheng.net/cpp/">
+    </form>
+    <script>
+        console.log(document.img.src);  //返回图像的地址
+        console.log(document.form.action);  //返回表单提交的路径
+    </script> -->
+
+    <!-- <img name="img" src="bg.gif" />
+    <form method="post" action="c.biancheng.net/cpp/">
+    </form>
+    <script>
+        console.log(document.images[0].src);  //返回图像的地址
+        console.log(document.forms[0].action);  //返回表单提交的路径
+    </script> -->
+
+    <img name="img" src="bg.gif" />
+    <form name="form" method="post" action="c.biancheng.net/cpp/">
+    </form>
+    <script>
+        console.log(document.images["img"].src);  //返回图像的地址
+        console.log(document.forms["form"].action);  //返回表单提交的路径
+
+        function f() {
+            document.write('<p>调用事件处理函数时动态生成的内容</p>');
+        }
+        f()
+        document.write('<p onclick="f()">文档解析时动态生成的内容</p>');
+    </script>
+</body>
+
+</html>

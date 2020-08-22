@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function addLargeNum(num1,num2){
+            let a = String.prototype.split.call(num1, "");
+            let b = String.prototype.split.call(num2, "");
+            let res=[]
+            let addOrder=0;
+           while(a.length||b.length){
+               let item1=parseInt(a.pop())|0;
+               let item2=parseInt(b.pop())|0;
+               let temp=item1+item2+addOrder;
+               if(temp>9){
+                   addOrder=1;
+                   temp%=10;
+               }else{
+                   addOrder=0;
+               }
+               res.unshift(temp);
+           }
+           if(addOrder) res.unshift(1);
+           return res.join('');
+        }
+
+        console.log(addLargeNum(789,23));
+    </script>
+</body>
+</html>

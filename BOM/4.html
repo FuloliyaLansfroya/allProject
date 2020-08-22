@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var s = window.navigator.userAgent;
+        //简写方法
+        var s = navigator.userAgent;
+        console.log(s);
+
+        var ua = navigator.userAgent.toLowerCase();  //获取用户端信息
+        var info = {
+            ie: /msie/.test(ua) && !/opera/.test(ua),  //匹配IE浏览器
+            op: /opera/.test(ua),  //匹配Opera浏览器
+            sa: /version.*safari/.test(ua),  //匹配Safari浏览器
+            ch: /chrome/.test(ua),  //匹配Chrome浏览器
+            ff: /gecko/.test(ua) && !/webkit/.test(ua)  //匹配Firefox浏览器
+        };
+        (info.ie) && console.log("IE浏览器");
+        (info.op) && console.log("Opera浏览器");
+        (info.sa) && console.log("Safari浏览器");
+        (info.ch) && console.log("Chrome浏览器");
+        (info.ff) && console.log("Firefox浏览器");
+
+        function getIEVer() {
+            var ua = navigator.userAgent;  //获取用户端信息
+            var b = ua.indexOf("Chrome/");  //检测特殊字符串“MSIE”的位置
+            if (b < 0) {
+                return 0;
+            }
+            return parseFloat(ua.substring(b + 5, ua.indexOf(";", b)));  //截取版本号，并转换为数值
+        }
+        console.log(getIEVer());
+
+        ['Win', 'Mac', 'X11', 'Linux'].forEach(function (t) {
+            (t === 'X11') ? t = 'Unix' : t;  //处理Unix系统的字符串
+            navigator['is' + t] = function () {  //为navigator对象扩展专用系统检测方法
+                return navigator.userAgent.indexOf(t) != -1;  //检测是否包含特定字符串
+            };
+        });
+        console.log(navigator.isWin());  //true
+        console.log(navigator.isMac());  //false
+        console.log(navigator.isLinux());  //false
+        console.log(navigator.isUnix());  //false
+    </script>
+</body>
+
+</html>

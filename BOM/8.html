@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            background-color: green;
+        }
+
+        .wrap::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .left {
+            width: 100px;
+            height: 180px;
+            float: left;
+            background-color: greenyellow;
+        }
+
+        .right {
+            width: 150px;
+            height: 200px;
+            float: right;
+            background-color: grey;
+
+        }
+
+        .center {
+            margin-left: 110px;
+            margin-right: 160px;
+            height: 150px;
+            background-color: honeydew;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="center"></div>
+    </div>
+    <script>
+        function quickSort(arr, i, j) {
+            if (i < j) {
+                let left = i;
+                let right = j;
+                let mid = Math.floor((left + right) / 2);
+                let temp = arr[left];
+                arr[left] = arr[mid];
+                arr[mid] = temp;
+                let pivot = arr[left];
+                while (i < j) {
+                    while (arr[j] >= pivot && i < j) {  // 从后往前找比基准小的数
+                        j--;
+                    }
+                    if (i < j) {
+                        arr[i++] = arr[j];
+                    }
+                    while (arr[i] <= pivot && i < j) {  // 从前往后找比基准大的数
+                        i++;
+                    }
+                    if (i < j) {
+                        arr[j--] = arr[i];
+                    }
+                }
+                arr[i] = pivot;
+                quickSort(arr, left, i - 1);
+                quickSort(arr, i + 1, right);
+                return arr;
+            }
+        }
+        console.log(quickSort([1, 4, 3, 6, 2], 0, 4));
+    </script>
+</body>
+
+</html>

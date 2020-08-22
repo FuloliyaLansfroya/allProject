@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<ul>
+    <li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+    \<li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+    <li>asxxxzzzxzx</li>
+
+</ul>
+<input type="text" />
+
+<body>
+    <script>
+        window.onload = function () {
+            document.body.onclick = f;
+        }
+        var f = function () {  //改变第三个框架文档的背景色为红色
+            parent.frames[2].document.body.style.backgroundColor = "red";
+        }
+        var o = document.getElementsByTagName("body")[0].childNodes;  //获取body下所有子元素
+        for (var i = 0; i < o.length; i++) {  //遍历元素集合
+            o[i].onmouseover = function (i) {  //注册鼠标经过事件处理函数
+                return function () {  //返回闭包函数
+                    f(o[i]);  //调用函数f，并传递当前对象引用
+                }
+            }(i);  //调用函数并传递循环序号，实现在闭包中存储对象序号值
+
+            o[i].onmouseleave = function (i) {  //为每个元素注册鼠标移出时清除延迟处理函数
+                return function () {
+                    clearTimeout(o[i].out);  //清除已注册的延迟处理函数
+                }
+            }(i);
+        }
+        function f(o) {  //延迟处理函数
+            var out = setTimeout(function () {
+                console.log(o.tagName);  //显示当前元素的名称
+            }, 500)  //定义延迟半秒钟后执行代码
+        }
+
+        var t = document.getElementsByTagName("input")[0];
+        var i = 1;
+        var out = setInterval(l, 1000);  //定义周期性执行的函数
+        function l() {
+            t.value = i++;
+            if (i > 10) {  //如果重复执行10次
+                clearTimeout(out);  //则清除周期性调用函数
+                console.log("10秒钟已到");
+            }
+        }
+    </script>
+</body>
+
+</html>

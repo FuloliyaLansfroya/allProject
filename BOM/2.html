@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>段落文本</p>
+    <script>
+        // win = window.open();  //打开新的空白窗口
+        // win.document.write("<h1>这是新打开的窗口</h1>");  //在新窗口中输出提示信息
+        // win.focus();  //让原窗口获取焦点
+        // win.opener.document.write("<h1>这是原来窗口</h1>");  //在原窗口中输出提示信息
+        // console.log(win.opener == window);  //检测window.opener属性值
+
+        var url = "http://c.biancheng.net";  //要打开的网页地址
+        var features = "height=500, width=800, top=100, left=100, toolbar=no, menubar=no,scrollbars = no, resizable = no, location = no, status = no";  //设置新窗口的特性
+        //动态生成一个超链接
+        document.write('<a href="c.biancheng.net" target="newW">切换到C语言中文网首页</a>');
+        var me = window.open(url, "newW", features);  //打开新窗口
+        setTimeout(function () {  //定时器
+            if (me.closed) {
+                console.log("创建的窗口已经关闭。");
+            } else {
+                me.close();
+            }
+        }, 5000);  //半秒钟之后关闭该窗口
+
+        var p = document.getElementsByTagName("p")[0];
+        p.onmouseover = function (i) {
+            setTimeout(function () {
+                console.log(p.tagName);
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

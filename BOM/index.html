@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(Object.prototype.__proto__) // null
+
+        const obj = new Object();
+        obj.name = 'Alice'
+        console.log(obj.name) // Alice
+
+        function Student(age) {
+            this.age = age;
+        }
+        Student.prototype.name = 'Alice'
+        const student = new Student();
+        student.name = 'pop'
+        console.log(student.name) // pop 查找到的是实例的属性
+        delete student.name
+        console.log(student.name) // Alice 在实例中查找不到该属性，向上查询，在原型中查找到该属性
+
+        // console.log(Student===Student.prototype.constructor) // true
+
+        // const student = new Student();
+        // console.log(student.constructor===Student); //true
+
+        // console.log(student.__proto__===Student.prototype); // true
+
+        // Student.prototype.name = 'Alice'
+        // const student1=new Student(); 
+        // const student2=new Student(); 
+        // console.log(student1.name); //Alice
+        // console.log(student2.name); //Alice
+        // Student.prototype.name = 'Pop'
+        // console.log(student2.name); //Pop
+    </script>
+</body>
+
+</html>
