@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./stack.js"></script>
+    <script src="./oneQueue.js"></script>
+    <script src="./sqQueue.js"></script>
+    <script src="./linkList.js"></script>
+    <script>
+        function Stacked() {
+            let stack = new Stack();
+            stack.push(1);
+            stack.push(2);
+            stack.push(3);
+            stack.push(4);
+            stack.push(5);
+            stack.push(6);
+            stack.getStack();
+            stack.pop();
+            console.log(stack.peek());
+        }
+
+        function oneQueued() {
+            let queue = new Queue();
+            queue.enQueue(1);
+            queue.enQueue(2);
+            queue.enQueue(3);
+            queue.enQueue(4);
+            queue.enQueue(5);
+            queue.enQueue(6);
+            queue.getQueue();
+            queue.deQueue();
+            console.log(queue.getHeader());
+        }
+
+        function SqQueued() {
+            let sq = new SqQueue(7);
+            sq.enQueue(1);
+            sq.enQueue(2);
+            sq.enQueue(3);
+            sq.enQueue(4);
+            sq.enQueue(5);
+            sq.enQueue(6);
+            sq.enQueue(7);
+            console.log(sq.getLength());
+            sq.getSqQueue();
+            console.log(sq.deQueue(), sq.getHeader())
+            sq.getSqQueue();
+            sq.resize(5);
+            sq.getSqQueue();
+        }
+        
+        function linkListed(){
+            let ll=new LinkList();
+            ll.addNode(1,0);
+            ll.addNode(3,1);
+            ll.addNode(4,2);
+            ll.addNode(2,3);
+            ll.addNode(6,4);
+            console.log(ll.getNode(2))
+            console.log(ll.removeNode(4,true))
+            console.log(ll.getNode(2))
+        }
+        SqQueued()
+    </script>
+</body>
+
+</html>
