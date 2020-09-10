@@ -1,0 +1,123 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "jsx": true
+      },
+      "ecmaVersion": 9
+    },
+    "globals": {
+      "window": true
+    },
+    "extends": [
+      "plugin:react-hooks/recommended",
+      "prettier",
+      "airbnb/hooks",
+      "airbnb"
+    ],
+    "plugins": [
+      "react",
+      "babel"
+    ],
+    "rules": {
+      // Rules                    A | B | C | D | E | F
+      // complexity             1-5 | 6-10 | 11-20 | 21-30 | 31-40 | 41+
+      // max-depth              1-2 | 3 | 4-5 | 6-7 | 8 | 9+
+      // max-nested-callbacks   1-3 | 4-5 | 6-10 | 11-15 | 16-20 | 21+
+      // max-params             1 | 2 | 3-4 | 5 | 6 | 7+
+      // max-lines              1-75 | 76-150 | 151-300 | 301-450 | 451-600 | 601+
+      // max-lines-per-function 1-13 | 14-25 | 26-50 | 51-75 | 76-100 | 101+
+      // max-statements         1-3 | 4-5 | 6-10 | 11-15 | 16-20 | 21+
+      "complexity": [
+        "warn",
+        {
+          "max": 10,
+          "max-depth": {
+            "max": 4
+          },
+          "max-len": {
+            // (默认 80) 强制行的最大长度
+            "code": 80,
+            // (默认 4) 指定 tab 字符的宽度
+            "tabWidth": 4,
+            // 强制注释的最大长度；默认长度同 code
+            "comments": 80,
+            // 忽略正则表达式匹配的行；可以只匹配单行，而且在 YAML 或 JSON 中需要双重转义
+            "ignorePattern": true,
+            // 忽略所有拖尾注释和行内注释
+            "ignoreComments": true,
+            // 忽略拖尾注释
+            "ignoreTrailingComments": true,
+            // 忽略含有链接的行
+            "ignoreUrls": true,
+            // 忽略含有双引号或单引号字符串的行
+            "ignoreStrings": true,
+            // 忽略包含模板字面量的行
+            "ignoreTemplateLiterals": true,
+            // 忽略包含正则表达式的行
+            "ignoreRegExpLiterals": true
+          },
+          "max-lines": {
+            // (默认 300) 强制一个文件的最大行数
+            "max": 300,
+            // 忽略空白行
+            "skipBlankLines": true,
+            // 忽略只包含注释的行
+            "skipComments": true
+          },
+          "max-lines-per-function": {
+            // (默认 50) 强制在函数中的最大行数
+            "max": 50,
+            // (默认 false) 忽略纯粹由空格组成的行
+            "skipBlankLines": false,
+            // (默认 false) 忽略只包含注释的行
+            "skipComments": false,
+            // (默认 false) 包括 IIFE 中包含的任何代码
+            "IIFEs": false
+          },
+          "max-nested-callbacks": {
+            // (默认 10) 强制回调函数最大可嵌套深度
+            "max": 10
+          },
+          "max-params": {
+            // (默认 3) 强制函数定义中最大参数个数
+            "max": 3
+          },
+          "max-statements": {
+            // 允许的最大语句数量
+            "max": 10,
+            // 忽略顶级函数
+            "ignoreTopLevelFunctions": true
+          }
+        }
+      ],
+      // disallow reassignment of function parameters
+      // disallow parameter object manipulation except for specific exclusions
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true,
+          "ignorePropertyModificationsFor": [
+            // for mbox state
+            "state",
+            // for reduce accumulators
+            "acc",
+            // for e.returnvalue
+            "e"
+          ]
+        }
+      ],
+      "linebreak-style": "off",
+      "no-console": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "webpack.base.js"
+        }
+      }
+    }
+  }
+  

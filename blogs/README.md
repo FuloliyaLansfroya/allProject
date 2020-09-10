@@ -1,3 +1,1 @@
-启动方式
-
-项目目录下：node sever.js
+鍚姩 node sever.js

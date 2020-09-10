@@ -34,7 +34,8 @@
             if (b < 0) {
                 return 0;
             }
-            return parseFloat(ua.substring(b + 5, ua.indexOf(";", b)));  //截取版本号，并转换为数值
+            console.log(ua.substring(b + 7, ua.indexOf(" ", b)));
+            return parseFloat(ua.substring(b + 7, ua.indexOf("S", b)));  //截取版本号，并转换为数值
         }
         console.log(getIEVer());
 
@@ -44,6 +45,7 @@
                 return navigator.userAgent.indexOf(t) != -1;  //检测是否包含特定字符串
             };
         });
+        console.log(navigator.userAgent.indexOf('Win'))
         console.log(navigator.isWin());  //true
         console.log(navigator.isMac());  //false
         console.log(navigator.isLinux());  //false

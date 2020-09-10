@@ -9,11 +9,11 @@
 
 <body>
     <script>
-        console.log(Object.prototype.__proto__) // null
+        // console.log(Object.prototype.__proto__) // null
 
-        const obj = new Object();
-        obj.name = 'Alice'
-        console.log(obj.name) // Alice
+        // const obj = new Object();
+        // obj.name = 'Alice'
+        // console.log(obj.name) // Alice
 
         function Student(age) {
             this.age = age;
@@ -31,6 +31,7 @@
         // console.log(student.constructor===Student); //true
 
         // console.log(student.__proto__===Student.prototype); // true
+        // console.log(Student.prototype.__proto__===Object.prototype); //true
 
         // Student.prototype.name = 'Alice'
         // const student1=new Student(); 

@@ -1,0 +1,45 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env", // 支持曾经的ES版本  官方定义允许使用最新版本的JS，不需要考虑环境问题
+        {
+          "useBuiltIns": "usage"
+        }
+      ],
+      "@babel/preset-react"  // jsx 的解析 
+    ],
+    "plugins": [
+      [
+        "@babel/syntax-dynamic-import" // 解析识别import动态导入语法
+      ],
+      [
+        "@babel/plugin-transform-runtime", // 辅助使用 转化 一些BOM里面不兼容的API 不会污染全局变量 多次使用只会打包一次 依赖统一按需引入,无重复引入,无多余引入
+        {
+          "absoluteRuntime": false,
+          "helpers": true,
+          "useESModules": false
+        }
+      ],
+      [
+        "@babel/plugin-proposal-decorators", // 装饰器 ES6 装饰类，方法
+        {
+          "legacy": true // 使用 stage-1 的装饰器 默认为false
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties", // 转换类的属性
+        {
+          "loose": true  // 属性的编译方式 默认为false
+        }
+      ],
+      [
+        "import", // 对 antd, antd-mobile, lodash, material-ui等库进行按需加载
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": true
+        }
+      ]
+    ]
+  }
+  

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="list">
+        <li class="item">1</li>
+        <li class="item">2</li>
+        <li class="item">3</li>
+        <li class="item">4</li>
+        <li class="item">5</li>
+    </ul>
+    <div id="wrap"></div>
+    <div id="yes" data-id="user" data-user="123245"></div>
+    <input type="text" />
+
+    <script>
+        const list=document.getElementsByClassName('list')[0];
+        const input = document.getElementsByTagName('input')[0];
+        const yes=document.getElementById('yes');
+        console.log(list.parentNode,list.parentElement); // body body
+        console.log(list.childNodes,list.children);   // Nodelist(11)  HTMLCollection(5)
+        console.log(list.firstChild,list.lastChild,list.firstElementChild,list.lastElementChild) // #text #text li-1 li-5
+        input.setAttribute('name','data');
+        console.log(input.getAttribute('name'))
+        console.log(input.hasAttribute('data'))
+        console.log(yes.dataset.id,yes.dataset.user)
+        yes.dataset.id='name'
+        const ul=document.createElement('ul');
+        let text = document.createTextNode("我是文本节点");
+        let clone=list.cloneNode(true);
+        for(let i=list.children.length-1;i>=0;i--){
+            ul.appendChild(list.children[i])
+        }
+        document.body.append(ul,text);
+        document.body.insertBefore(clone,ul)
+        document.body.insertAdjacentHTML('afterbegin','开头')
+        document.body.removeChild(input)
+        document.body.replaceChild(list,text);
+        console.log(input.previousSibling,input.previousElementSibling,input.nextSibling,input.nextElementSibling);
+    </script>
+</body>
+</html>

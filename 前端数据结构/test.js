@@ -1,94 +1,59 @@
-// class Stack {
-//     constructor(){
-//         this.stack=[]
-//     }
-//     push(item){
-//         this.stack.push(item);
-//     }
-//     pop(){
-//         this.stack.pop()
-//     }
-//     peek(){
-//         return this.stack(this.getLength()-1);
-//     }
-//     getLength(){
-//         return this.stack.length;
-//     }
-//     isEmpity(){
-//         return this.getLength===0;
-//     }
-// }
+Array.prototype.unique=function(){
+  let res=[];
+  let json=[];
+  for(let i=0;i<this.length;i++){
+    if(!json[this[i]]){
+      res.push(this[i])
+      json[this[i]]=1;
+    }
+  }
+  return res;
+}
 
-// class Queue{
-//     constructor(){
-//         this.queue=[]
-//     }
-//     enQueue(item){
-//         this.queue.push(item);
-//     }
-//     deQueue(){
-//         return this.queue.shift();
-//     }
-//     getHeader(){
-//         return this.queue[0]
-//     }
-//     getLength(){
-//         return this.queue.length;
-//     }
-//     isEmpity(){
-//         return this.getLength===0;
-//     }
-// }
-
-class SqQueue {
-  constructor() {
-    this.queue = new Array();
-    this.first = 0;
-    this.last = 0;
-    this.size = 0;
-  }
-  enQueue(item) {
-    if (
-      this.first === this.last % this.queue.length &&
-      this.last >= this.getLength()
-    ) {
-      this.resize(this.getLength() + 1);
+quickSort = (arr,i,j) =>{
+  let left=i;
+  let right=j;
+  let mid=Math.floor((left+right)/2);
+  let temp=arr[mid];
+  // arr[left]=arr[mid];
+  // arr[mid]=arr[left];
+  // let pivot=arr[left];
+  // while(i<j){
+  //   while(arr[j]>=pivot&&i<j){
+  //     j--;
+  //   }
+  //   if(i<j){
+  //     arr[i++]=arr[j];
+  //   }
+  //   while(arr[i]<=pivot&&i<j){
+  //     i++;
+  //   }
+  //   if(i<j){
+  //     arr[j--]=arr[i];
+  //   }
+  // }
+  // arr[i]=pivot;
+  // quickSort(arr,left,i-1);
+  // quickSort(arr,i,right);
+  while(i<mid||j>mid){
+    while(arr[i]<=temp&&i<mid){
+      i++;
     }
-    this.queue[this.last] = item;
-    this.size++;
-    this.last = this.last + 1;
-  }
-  deQueue() {
-    if (this.isEmpity()) {
-      throw Error("queue is empty");
+    if(i<mid){
+      arr[mid]=arr[i];
+      arr[i]=temp;
+      temp=arr[mid];
     }
-    let r = this.queue[this.first];
-    this.queue.shift();
-    this.size--;
-    return r;
-  }
-  getHeader() {
-    if (this.isEmpity()) {
-      throw Error("queue is empty");
+    while(arr[j]>=temp&&j>mid){
+      j--;
     }
-    return this.queue[this.first];
-  }
-  getLength() {
-    return this.queue.length;
-  }
-  isEmpity() {
-    return this.first === this.last && this.getLength() === 0;
-  }
-  resize(length) {
-    let q = new Array(length);
-    for (let i = 0; i < length; i++) {
-      q[i] = this.queue[(i + this.first) % this.getLength()];
+    if(j>mid){
+      arr[mid]=arr[j];
+      arr[j]=temp;
+      temp=arr[mid];
     }
-    this.queue = q;
-    this.first = 0;
-    this.last = this.size;
   }
-  getSqQueue() {
-    console.log(this.queue);
-  }
+  quickSort(arr,left,mid-1);
+  quickSort(arr,mid,j);
+  return arr;
 }
